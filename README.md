@@ -1,2 +1,16 @@
 # MiniTest
-A minimal, header-only testing framework for C++11 with colorful output, test timing, and informative assertion macros.
+Минималистичный header-only тестовый фреймворк для C++17.
+
+## Возможности
+- Одна строка подключения
+- Цветной вывод
+- Вывод времени выполнения
+- Макросы `ASSERT_EQ`, `ASSERT_TRUE`, `ASSERT_THROW`
+- Информация о файле и строке при падении
+
+## Быстрый старт
+
+### Ручное подключение
+Скопируйте `minitest.hpp` в свой проект и подключите:
+```cpp
+#include "minitest.hpp"
