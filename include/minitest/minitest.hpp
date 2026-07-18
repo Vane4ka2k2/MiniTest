@@ -38,33 +38,55 @@ private:
 // Формируем сообщение и бросаем AssertionFailure
 #define MINITEST_ASSERT_EQ(actual, expected)                                   \
     do {                                                                       \
-        if ((actual) != (expected)) {                                          \
+        auto&& _minitest_actual = (actual);                                    \
+        auto&& _minitest_expected = (expected);                                \
+        if (_minitest_actual != _minitest_expected) {                          \
             std::ostringstream ss;                                             \
-            ss << "Expected: " << (expected) << ", Actual: " << (actual);      \
+            ss << "Expected: " << _minitest_expected << ", Actual: " << _minitest_actual; \
             throw ::minitest::AssertionFailure(ss.str(), __FILE__, __LINE__);  \
         }                                                                      \
     } while(0)
 
-#define MINITEST_ASSERT_TRUE(expr)                                             \
+#define MINITEST_ASSERT_NEQ(actual, expected)                                  \
     do {                                                                       \
-        if (!(expr)) {                                                         \
+        auto&& _minitest_actual = (actual);                                    \
+        auto&& _minitest_expected = (expected);                                \
+        if (_minitest_actual == _minitest_expected) {                          \
             std::ostringstream ss;                                             \
-            ss << "Assertion failed: " << #expr;                               \
+            ss << "Expected inequality, but both are: " << _minitest_actual;   \
             throw ::minitest::AssertionFailure(ss.str(), __FILE__, __LINE__);  \
         }                                                                      \
     } while(0)
 
-#define MINITEST_ASSERT_THROW(expr, exception_type)                            \
+#define MINITEST_ASSERT_TRUE(...)                                              \
+    do {                                                                       \
+        if (!(__VA_ARGS__)) {                                                  \
+            std::ostringstream ss;                                             \
+            ss << "Assertion failed: " << #__VA_ARGS__;                        \
+            throw ::minitest::AssertionFailure(ss.str(), __FILE__, __LINE__);  \
+        }                                                                      \
+    } while(0)
+
+#define MINITEST_ASSERT_FALSE(...)                                             \
+    do {                                                                       \
+        if (__VA_ARGS__) {                                                     \
+            std::ostringstream ss;                                             \
+            ss << "Assertion failed (expected false): " << #__VA_ARGS__;       \
+            throw ::minitest::AssertionFailure(ss.str(), __FILE__, __LINE__);  \
+        }                                                                      \
+    } while(0)
+
+#define MINITEST_ASSERT_THROW(expr, ...)                                       \
     do {                                                                       \
         bool caught = false;                                                   \
         try {                                                                  \
             expr;                                                              \
-        } catch (const exception_type&) {                                      \
+        } catch (const __VA_ARGS__&) {                                         \
             caught = true;                                                     \
         } catch (...) {}                                                       \
         if (!caught) {                                                         \
             std::ostringstream ss;                                             \
-            ss << "Expected exception: " << #exception_type << " was not thrown."; \
+            ss << "Expected exception: " << #__VA_ARGS__ << " was not thrown.";\
             throw ::minitest::AssertionFailure(ss.str(), __FILE__, __LINE__);  \
         }                                                                      \
     } while(0)
@@ -95,7 +117,7 @@ public:
         tests_.push_back({name, std::move(test)});
     }
 
-    // Запуск всех тестов; возвращает количество пройденных
+    // Запуск всех тестов; возвращает количество упавших
     int run_all(std::ostream& out = std::cout) {
         int passed = 0;
         out << "Running " << tests_.size() << " test(s)...\n" << std::endl;
@@ -130,7 +152,7 @@ public:
         }
 
         out << "\nResults: " << passed << "/" << tests_.size() << " passed." << std::endl;
-        return passed;
+        return tests_.size() - passed;
     }
 
 private:
@@ -152,6 +174,12 @@ private:
         } minitest_registrar_##name;                                           \
     }                                                                          \
     static void minitest_test_##name()
+
+// ---------- Макрос генерации main() ----------
+#define MINITEST_MAIN()                                                        \
+    int main() {                                                               \
+        return ::minitest::TestSuite::instance().run_all();                    \
+    }
 
 } // namespace minitest
 
