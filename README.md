@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 # рџ§Є MiniTest вЂ” Header-only C++17 С‚РµСЃС‚РѕРІС‹Р№ С„СЂРµР№РјРІРѕСЂРє
 
