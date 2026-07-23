@@ -22,18 +22,18 @@
 
 ## 🌟 Особенности
 
-- 🚀 **Zero Dependencies** — Состоит из одного заголовочного файла minitest.hpp.
-- 🎨 **Цветной консольный вывод** — Наглядные статусы прохождения тестов (PASS / FAIL).
+- 🚀 **Zero Dependencies** — Состоит из одного заголовочного файла `minitest.hpp`.
+- 🎨 **Цветной консольный вывод** — Наглядные статусы прохождения тестов (`PASS` / `FAIL`).
 - ⏱ **Замер времени** — Автоматический измеритель времени выполнения каждого теста в миллисекундах.
-- 🛠 **Макросы макета** — Набор удобных проверок: ASSERT_EQ, ASSERT_NE, ASSERT_TRUE, ASSERT_FALSE.
+- 🛠 **Макросы макета** — Набор удобных проверок: `ASSERT_EQ`, `ASSERT_NE`, `ASSERT_TRUE`, `ASSERT_FALSE`.
 
 ---
 
 ## 📦 Быстрое подключение
 
-Скопируйте include/minitest/minitest.hpp в ваш проект или подключите через CMake FetchContent:
+Скопируйте `include/minitest/minitest.hpp` в ваш проект или подключите через CMake `FetchContent`:
 
-`cmake
+```cmake
 include(FetchContent)
 FetchContent_Declare(
     minitest
@@ -43,13 +43,13 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(minitest)
 
 target_link_libraries(my_test PRIVATE MiniTest::MiniTest)
-`
+```
 
 ---
 
 ## 💡 Пример использования
 
-`cpp
+```cpp
 #include <minitest/minitest.hpp>
 
 TEST_CASE("Basic Math") {
@@ -60,7 +60,7 @@ TEST_CASE("Basic Math") {
 int main() {
     return RUN_ALL_TESTS();
 }
-`
+```
 
 ---
 
