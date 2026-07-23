@@ -1,3 +1,7 @@
+﻿# ==========================================
+# C++ / CMake / Qt / Windows / IDE .gitignore
+# ==========================================
+
 # Prerequisites
 *.d
 
@@ -11,20 +15,12 @@
 *.gch
 *.pch
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
-*.so.*
 
-
-# Fortran module files
+# Fortran modules
 *.mod
 *.smod
 
@@ -39,31 +35,58 @@
 *.out
 *.app
 
-# Build directories
+# CMake build directories & files
 build/
-Build/
 build-*/
-
-# CMake generated files
-CMakeFiles/
+out/
+bin/
+obj/
 CMakeCache.txt
+CMakeFiles/
 cmake_install.cmake
-Makefile
 install_manifest.txt
 compile_commands.json
+CTestTestfile.cmake
+_deps/
+*.cmake.user
+CMakePresets.json.user
 
-# Temporary files
-*.tmp
+# MSVC / Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosv
+*.sln.docstates
+*.userprefs
+*.ncb
+*.suo
+*.sln.docstates
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+*.ipch
+
+# Qt / Qt Creator
+.qtcreator/
+*.pro.user
+*.pro.user.*
+.qmake.stash
+ui_*.h
+qrc_*.cpp
+moc_*.cpp
+
+# VS Code / JetBrains IDEs
+.vscode/
+.idea/
+.clion/
+
+# OS generated files
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# Temporary / Log files
 *.log
+*.tmp
 *.bak
-*.swp
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/

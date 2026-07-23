@@ -1,79 +1,69 @@
-# MiniTest
+﻿<div align="center">
 
-Минималистичный, легковесный **header-only** тестовый фреймворк для C++17. Идеально подходит для небольших проектов, лабораторных работ и быстрого написания unit-тестов без необходимости сборки тяжелых библиотек (вроде Google Test).
+# рџ§Є MiniTest вЂ” Header-only C++17 С‚РµСЃС‚РѕРІС‹Р№ С„СЂРµР№РјРІРѕСЂРє
 
-## ✨ Возможности
-- **Header-only**: Для интеграции достаточно скопировать один файл `minitest.hpp`.
-- **Автоматическая регистрация тестов**: Не нужно вручную добавлять тест в список запуска — макрос `MINITEST_TEST` сделает это за вас.
-- **Цветной вывод результатов**: Выделение пройденных и проваленных тестов зеленым и красным цветами в терминале.
-- **Бенчмаркинг**: Отображение времени выполнения каждого теста в миллисекундах.
-- **Отчет об ошибках**: Вывод имени файла и точного номера строки, на которой сработало падение утверждения (assert).
+**Р›РµРіРєРѕРІРµСЃРЅС‹Р№, Р±С‹СЃС‚СЂС‹Р№ Рё СѓРґРѕР±РЅС‹Р№ Р·Р°РіРѕР»РѕРІРѕС‡РЅС‹Р№ С„СЂРµР№РјРІРѕСЂРє РґР»СЏ РјРѕРґСѓР»СЊРЅРѕРіРѕ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ (Unit Testing) РЅР° C++17 СЃ С†РІРµС‚РЅС‹Рј РєРѕРЅСЃРѕР»СЊРЅС‹Рј РІС‹РІРѕРґРѕРј Рё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёРј Р·Р°РјРµСЂРѕРј РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ.**
 
----
+![C++17](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=cplusplus)
+![Header Only](https://img.shields.io/badge/Library-Header--Only-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## 🛠️ Доступные макросы
-
-### Утверждения (Assertions)
-* `MINITEST_ASSERT_EQ(actual, expected)` — проверка равенства двух значений.
-* `MINITEST_ASSERT_NEQ(actual, expected)` — проверка неравенства двух значений.
-* `MINITEST_ASSERT_TRUE(expr)` — проверка того, что выражение `expr` истинно (`true`).
-* `MINITEST_ASSERT_FALSE(expr)` — проверка того, что выражение `expr` ложно (`false`).
-* `MINITEST_ASSERT_THROW(expr, ExceptionType)` — проверка того, что выражение `expr` генерирует исключение указанного типа `ExceptionType`.
-
-### Описание и запуск тестов
-* `MINITEST_TEST(test_name) { ... }` — объявление тест-кейса.
-* `MINITEST_MAIN()` — автоматическое генерирование функции `main()`, которая запускает все зарегистрированные тесты и возвращает количество упавших проверок как код завершения процесса.
+</div>
 
 ---
 
-## 🚀 Быстрый старт
+## рџ“‘ РћРіР»Р°РІР»РµРЅРёРµ
+- [рџЊџ РћСЃРѕР±РµРЅРЅРѕСЃС‚Рё](#-РѕСЃРѕР±РµРЅРЅРѕСЃС‚Рё)
+- [рџ“¦ Р‘С‹СЃС‚СЂРѕРµ РїРѕРґРєР»СЋС‡РµРЅРёРµ](#-Р±С‹СЃС‚СЂРѕРµ-РїРѕРґРєР»СЋС‡РµРЅРёРµ)
+- [рџ’Ў РџСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ](#-РїСЂРёРјРµСЂ-РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ)
+- [рџ“њ Р›РёС†РµРЅР·РёСЏ](#-Р»РёС†РµРЅР·РёСЏ)
 
-Просто подключите `minitest.hpp` в вашем файле с тестами:
+---
 
-```cpp
-#include "minitest/minitest.hpp"
-#include <stdexcept>
+## рџЊџ РћСЃРѕР±РµРЅРЅРѕСЃС‚Рё
 
-// Объявление теста
-MINITEST_TEST(MathOperations) {
-    int result = 2 + 2;
-    MINITEST_ASSERT_EQ(result, 4);
-    MINITEST_ASSERT_NEQ(result, 5);
+- рџљЂ **Zero Dependencies** вЂ” РЎРѕСЃС‚РѕРёС‚ РёР· РѕРґРЅРѕРіРѕ Р·Р°РіРѕР»РѕРІРѕС‡РЅРѕРіРѕ С„Р°Р№Р»Р° minitest.hpp.
+- рџЋЁ **Р¦РІРµС‚РЅРѕР№ РєРѕРЅСЃРѕР»СЊРЅС‹Р№ РІС‹РІРѕРґ** вЂ” РќР°РіР»СЏРґРЅС‹Рµ СЃС‚Р°С‚СѓСЃС‹ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ С‚РµСЃС‚РѕРІ (PASS / FAIL).
+- вЏ± **Р—Р°РјРµСЂ РІСЂРµРјРµРЅРё** вЂ” РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ РёР·РјРµСЂРёС‚РµР»СЊ РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ РєР°Р¶РґРѕРіРѕ С‚РµСЃС‚Р° РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С….
+- рџ›  **РњР°РєСЂРѕСЃС‹ РјР°РєРµС‚Р°** вЂ” РќР°Р±РѕСЂ СѓРґРѕР±РЅС‹С… РїСЂРѕРІРµСЂРѕРє: ASSERT_EQ, ASSERT_NE, ASSERT_TRUE, ASSERT_FALSE.
+
+---
+
+## рџ“¦ Р‘С‹СЃС‚СЂРѕРµ РїРѕРґРєР»СЋС‡РµРЅРёРµ
+
+РЎРєРѕРїРёСЂСѓР№С‚Рµ include/minitest/minitest.hpp РІ РІР°С€ РїСЂРѕРµРєС‚ РёР»Рё РїРѕРґРєР»СЋС‡РёС‚Рµ С‡РµСЂРµР· CMake FetchContent:
+
+`cmake
+include(FetchContent)
+FetchContent_Declare(
+    minitest
+    GIT_REPOSITORY https://github.com/Vane4ka2k2/MiniTest.git
+    GIT_TAG main
+)
+FetchContent_MakeAvailable(minitest)
+
+target_link_libraries(my_test PRIVATE MiniTest::MiniTest)
+`
+
+---
+
+## рџ’Ў РџСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ
+
+`cpp
+#include <minitest/minitest.hpp>
+
+TEST_CASE("Basic Math") {
+    ASSERT_EQ(2 + 2, 4);
+    ASSERT_TRUE(10 > 5);
 }
 
-// Тестирование логических выражений
-MINITEST_TEST(BooleanLogic) {
-    bool is_cpp_fun = true;
-    MINITEST_ASSERT_TRUE(is_cpp_fun);
+int main() {
+    return RUN_ALL_TESTS();
 }
+`
 
-// Тестирование ожидаемых исключений
-MINITEST_TEST(ExceptionHandling) {
-    auto divide_by_zero = []() {
-        throw std::invalid_argument("Division by zero!");
-    };
-    MINITEST_ASSERT_THROW(divide_by_zero(), std::invalid_argument);
-}
+---
 
-// Генерируем main()
-MINITEST_MAIN()
-```
+## рџ“њ Р›РёС†РµРЅР·РёСЏ
 
-### Сборка и запуск:
-Поскольку фреймворк header-only, вам нужно лишь указать путь к заголовочным файлам при компиляции:
-
-```bash
-g++ -std=c++17 -I./include test_main.cpp -o run_tests
-./run_tests
-```
-
-### Пример вывода в консоли:
-```text
-Running 3 test(s)...
-
-[PASS] MathOperations (0ms)
-[PASS] BooleanLogic (0ms)
-[PASS] ExceptionHandling (0ms)
-
-Results: 3/3 passed.
-```
+Р Р°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ РїРѕРґ Р»РёС†РµРЅР·РёРµР№ **MIT**. РџРѕРґСЂРѕР±РЅРµРµ СЃРј. РІ С„Р°Р№Р»Рµ [LICENSE](LICENSE).
